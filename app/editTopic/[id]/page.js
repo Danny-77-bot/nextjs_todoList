@@ -1,7 +1,10 @@
+import EditForm from '@/app/components/EditForm'
 import React from 'react'
 
 export default function EditTopic() {
   return (
-    <div>Edit</div>
+    <div>
+        <EditForm/>
+    </div>
   )
 }
