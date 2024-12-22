@@ -34,3 +34,35 @@ export async function PUT(request, context) {
     );
   }
 }
+export async function GET(request, context) {
+    try {
+      // Destructure and safely access the ID from params
+      const { params } = context;
+      const id = params?.id;
+  
+      // Validate ID
+      if (!id) {
+        return NextResponse.json({ message: "ID is required" }, { status: 400 });
+      }
+  
+      // Connect to the database
+      await connectionDB();
+  
+      // Find the ToDo item by ID
+      const todo = await Topic.findById(id);
+  
+      // Handle not found case
+      if (!todo) {
+        return NextResponse.json({ message: "ToDo not found" }, { status: 404 });
+      }
+  
+      // Return the ToDo item
+      return NextResponse.json(todo, { status: 200 });
+    } catch (error) {
+      // Handle errors
+      return NextResponse.json(
+        { message: "Failed to fetch ToDo", error: error.message },
+        { status: 500 }
+      );
+    }
+  }

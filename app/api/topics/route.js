@@ -31,7 +31,7 @@ export async function POST(request) {
       return NextResponse.json({ message: "Failed to retrieve topics", error: error.message }, { status: 500 });
     }
   }
-  
+
   export async function DELETE(request) {
     const id = request.nextUrl.searchParams.get("id");
     await connectionDB();
