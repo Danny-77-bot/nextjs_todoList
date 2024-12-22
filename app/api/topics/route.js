@@ -32,10 +32,5 @@ export async function POST(request) {
     }
   }
 
-  export async function DELETE(request) {
-    const id = request.nextUrl.searchParams.get("id");
-    await connectionDB();
-    await Topic.findByIdAndDelete(id);
-    return NextResponse.json({ message: "Topic deleted" }, { status: 200 });
-  }
-  
+
+

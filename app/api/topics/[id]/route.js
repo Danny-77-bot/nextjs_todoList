@@ -66,3 +66,27 @@ export async function GET(request, context) {
       );
     }
   }
+
+  export async function DELETE(request, { params }) {
+    const { id } = params;
+  
+    try {
+      // Connect to the database
+      await connectionDB();
+  
+      // Find and delete the topic by ID
+      const deletedTopic = await Topic.findByIdAndDelete(id);
+  
+      if (!deletedTopic) {
+        return NextResponse.json({ message: "Topic not found" }, { status: 404 });
+      }
+  
+      // Respond with success
+      return NextResponse.json({ message: "Topic deleted successfully" }, { status: 200 });
+    } catch (error) {
+      return NextResponse.json(
+        { message: "Failed to delete the topic", error: error.message },
+        { status: 500 }
+      );
+    }
+  }
